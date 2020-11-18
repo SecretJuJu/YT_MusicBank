@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\UserInfoController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,3 +24,6 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/user_info',[App\Http\Controllers\UserInfoController::class,'show'])->name('user_logs.show');
+Route::post('/user_info',[App\Http\Controllers\UserInfoController::class,'store'])->name('user_logs.show');
