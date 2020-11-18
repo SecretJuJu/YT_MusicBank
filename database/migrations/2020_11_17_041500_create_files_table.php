@@ -19,7 +19,6 @@ class CreateFilesTable extends Migration
             $table->string('name');
             $table->string('path')->unique();
             $table->unsignedInteger('file_size');
-            $table->string('filename');
             $table->string('file_hash',32)->unique();
             $table->string('file_type',5);
             $table->timestamps();
