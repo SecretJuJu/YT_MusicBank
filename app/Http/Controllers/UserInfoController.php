@@ -15,7 +15,7 @@ class UserInfoController extends Controller
         
         // return $request->user()->id;
         return user_info::join('files',function ($join) use ($request) {
-            $join->on('user_infos.file_hash', '=', 'files.file_hash')->where('user_infos.user_id','=',$request->user()->id);
+            $join->on('user_infos.file_hash','files.file_hash')->where('user_infos.user_id',$request->user()->id);
         })->get();
     }
 
@@ -24,7 +24,6 @@ class UserInfoController extends Controller
             'user_id' => $request->user()->id,
             'youtube_id' => $request->youtube_id,
         ]);
-        
         return redirect()->back();
     }
 }
