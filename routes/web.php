@@ -14,7 +14,7 @@ use App\Http\Controllers\UserInfoController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
 
 
@@ -24,6 +24,4 @@ Auth::routes();
 
 Route::get('/user_info',[App\Http\Controllers\UserInfoController::class,'show'])->name('user_logs.show');
 Route::post('/user_info',[App\Http\Controllers\UserInfoController::class,'store'])->name('user_logs.show');
-
-
 
