@@ -14,9 +14,11 @@ class UserInfoController extends Controller
     public function show(Request $request){
         
         // return $request->user()->id;
-        return user_info::join('files',function ($join) use ($request) {
+        $infos = user_info::join('files',function ($join) use ($request) {
             $join->on('user_infos.file_hash','files.file_hash')->where('user_infos.user_id',$request->user()->id);
         })->get();
+        return view('user_info.show', ['infos'=>$infos]);
+        // return view('user_info.show', compact('info'));
     }
 
     public function store(Request $request){
