@@ -7,7 +7,9 @@
     </head>
     <body>
         @if (Auth::check())
-            loggined
+            <?php 
+                echo "test";
+            ?>
         @else
             not loggined
         @endif
