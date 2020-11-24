@@ -7,11 +7,13 @@
     </head>
     <body>
         @if (Auth::check())
-            <?php 
-                echo "test";
-            ?>
+            logined
         @else
             not loggined
         @endif
+
+        <form action="/search" method="get">
+            <input type="text" name="uri">
+        </form>
     </body>
 </html>
