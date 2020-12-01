@@ -27,6 +27,9 @@ class YoutubeController extends Controller
         // $this->middleware('auth');
 
     }   
+    public function downloadPage(Request $request){
+        return view("youtube.download");
+    }
     public function search(Request $request)
     {
          // checking uri param set
@@ -73,25 +76,44 @@ class YoutubeController extends Controller
             }
         }
         $yt = new YoutubeDl();
-        
-        $collection = $yt->download(
-            Options::create()
-                ->downloadPath("./")
-                ->extractAudio(true)
-                ->audioFormat($_POST["filetype"])
-                ->audioQuality('0') // best
-                ->output('%(title)s.%(ext)s')
-                ->url('https://www.youtube.com/watch?v='.$_POST["youtube_id"])
-        );
-
+        if ($_POST["filetype"]==="mp3"){
+            $collection = $yt->download(
+                Options::create()
+                    ->downloadPath($dir)
+                    ->extractAudio(true)
+                    ->audioFormat("mp3")
+                    ->audioQuality('0') // best
+                    ->output($_POST["youtube_id"].".mp3")
+                    ->url('https://www.youtube.com/watch?v='.$_POST["youtube_id"])
+            );
+        }else if ($_POST["filetype"] === "mp4"){
+            $collection = $yt->download(
+                Options::create()
+                    ->downloadPath($dir)
+                    ->url('https://www.youtube.com/watch?v='.$_POST["youtube_id"])
+                    ->output($_POST["youtube_id"].".mp4")
+            );
+        }else {
+            return "no hack TT";
+        }
+        $youtube_id = $_POST["youtube_id"];
+        $name = null;
+        $filesize = 0;
         foreach ($collection->getVideos() as $video) {
             if ($video->getError() !== null) {
                 echo "Error downloading video: {$video->getError()}.";
             } else {
-            echo $video->getTitle(); // Will return Phonebloks
-            // $video->getFile(); // \SplFileInfo instance of downloaded file
+                echo "download success"; // Will return Phonebloks
+                $name = $video->getTitle();
+                $filesize = $video->getFilesize();
             }
         }
         
+        $filehash =  hash_file( "md5", $dir."/".$_POST["youtube_id"].".".$_POST["filetype"] );
+        echo $youtube_id;
+        echo $name;
+        echo $filesize;
+        echo $filehash;
+
     }
 }

@@ -34,7 +34,9 @@ Route::post('/logging',[App\Http\Controllers\UserInfoController::class,'store'])
 
 // youtubeController
 Route::get('/search',[App\Http\Controllers\YoutubeController::class,'search'])->name('youtube.search');
-Route::post('/download',[App\Http\Controllers\YoutubeController::class,'download'])->name('youtube.download');
+
+Route::get('/download',[App\Http\Controllers\YoutubeController::class,'downloadPage'])->name('youtube.downloadPage');
+Route::post('/download',[App\Http\Controllers\YoutubeController::class,'download'])->name('youtube.downloadLogic');
 // for logging test
 //  Route::post('/download',[App\Http\Controllers\YoutubeController::class,'download'])->name('youtube.download');
 
