@@ -28,4 +28,5 @@ class UserInfoController extends Controller
         ]);
         return redirect()->back();
     }
+
 }
