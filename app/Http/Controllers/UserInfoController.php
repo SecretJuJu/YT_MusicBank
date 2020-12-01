@@ -22,6 +22,7 @@ class UserInfoController extends Controller
     }
 
     public function store(Request $request){
+        return "it works!";
         user_info::create([
             'user_id' => $request->user()->id,
             'youtube_id' => $request->youtube_id,
