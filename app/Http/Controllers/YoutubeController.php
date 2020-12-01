@@ -58,8 +58,7 @@ class YoutubeController extends Controller
 
     public function download(Request $request)
     {
-        return "it works";
-
+        
         if($_POST["filetype"] == 'mp3'){
             $dir = "./media/mp3";
             $filename = $_POST["youtube_id"]."."."mp3";
@@ -77,8 +76,12 @@ class YoutubeController extends Controller
         
         $collection = $yt->download(
             Options::create()
-                ->downloadPath($dir)
-                ->url('https://www.youtube.com/watch?v='.$_POST['youtube_id'])
+                ->downloadPath("./")
+                ->extractAudio(true)
+                ->audioFormat($_POST["filetype"])
+                ->audioQuality('0') // best
+                ->output('%(title)s.%(ext)s')
+                ->url('https://www.youtube.com/watch?v='.$_POST["youtube_id"])
         );
 
         foreach ($collection->getVideos() as $video) {
