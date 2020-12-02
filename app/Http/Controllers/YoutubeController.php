@@ -27,9 +27,7 @@ class YoutubeController extends Controller
         // $this->middleware('auth');
 
     }   
-    public function downloadPage(Request $request){
-        return view("youtube.download");
-    }
+    
     public function search(Request $request)
     {
          // checking uri param set
@@ -42,7 +40,18 @@ class YoutubeController extends Controller
         $youtube_uri = urldecode($_GET['uri']);
          // Distinguish if it is a YouTube link
          if($this->check_youtubeUrl($youtube_uri)){
-            $retData = ['result'=>true];
+            $youtube = "http://www.youtube.com/oembed?url=". $youtube_uri ."&format=json";
+            
+            $curl = curl_init($youtube);
+            curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+            $return = curl_exec($curl);
+            curl_close($curl);
+            
+            if (json_decode($return) === null){
+                return $return;
+            }
+            
+            $retData = ['result'=>true,'uri'=>$youtube_uri];
             return view('youtube.search', ['retData'=>$retData]);
          }
          else {
@@ -50,11 +59,12 @@ class YoutubeController extends Controller
             return view('youtube.search', ['retData'=>$retData]);
          }
       
+         
 
-        // 링크가 유효하다면 result : true 아니라면 result : false
         
-
-        // true 일때 mp3 로 다운로드 할지 mp4로 다운로드할지 선택
+        
+        
+           
     }
 
     
@@ -115,5 +125,12 @@ class YoutubeController extends Controller
         echo $filesize;
         echo $filehash;
 
+        files::create(array(
+            'youtube_id' => $youtube_id,
+            'name'  => $name,
+            'file_size' => intval($filesize/1024),
+            'file_hash' => $filehash,
+            'file_type' => $_POST["filetype"]
+        ));
     }
 }
