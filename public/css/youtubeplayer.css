@@ -1,0 +1,3 @@
+/* youtube플레이어 화면에 꽉차게 하는 css */
+#youTubePlayer1 {position:relative;width:100%;padding-bottom:56.25%;}
+#youTubePlayer1 iframe {position:absolute;width:100%;height:100%;}

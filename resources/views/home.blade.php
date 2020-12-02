@@ -6,14 +6,22 @@
         <title>YT MusicBank</title>
     </head>
     <body>
+        @include('layouts.app')
         @if (Auth::check())
-            logined
+            
         @else
-            not loggined
+            
         @endif
-
-        <form action="/search" method="get">
-            <input type="text" name="uri">
-        </form>
+        <div id="main-logo">
+            img
+        </div>
+        <div id="search">
+            <form action="/search" method="get">
+                <input id="search-box" type="text" placeholder="Type Youtube URL" name="uri">
+                <input id="search-button" type="submit" value="SEARCH">
+            </form>
+        </div>
+        
+    <div id='result'></div>
     </body>
 </html>

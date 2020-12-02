@@ -10805,6 +10805,70 @@ a.text-dark:focus {
   visibility: hidden !important;
 }
 
+/*--------------------------------------------------*/
+
+#welcome-user {
+  font-size:24px;
+  color:black;
+  text-align:right;
+  margin:auto;
+}
+
+#main-logo {
+  display:table;
+  margin:auto;
+}
+
+#search-box {
+  display:table;
+  margin:500px auto 0px auto;
+  width:600px;
+  height:auto;
+  border-radius:10px 10px;
+  font-size:35px;
+  text-indent:15px;
+  outline: none;
+}
+
+#search-box:focus,
+#search-box:hover {
+  box-shadow: 3px 3px 5px #cccccc;
+  display:table;
+  margin:500px auto 0px auto;
+  width:600px;
+  height:auto;
+  border-radius:10px 10px;
+  font-size:35px;
+  text-indent:15px;
+  outline: none;
+}
+
+#search-button {
+  /* background:url("../../img/search.png"); */
+  background-repeat: no-repeat;
+  display:flex;
+  margin:-62px 23.5% 0px auto;
+  width:200px;
+  height:62px;
+  border-radius:10px 10px;
+  font-size:15px;
+}
+
+
+
+#thumbnail {
+  display:table;
+  margin:auto;
+  width:600px;
+  height:600px;
+  border-radius:10px 10px;
+  outline: none;
+}
+
+#youTubePlayer1 {position:relative;width:100%;padding-bottom:56.25%;}
+#youTubePlayer1 iframe {position:absolute;width:100%;height:100%;}
+/*--------------------------------------------------*/
+
 @media print {
   *,
   *::before,
