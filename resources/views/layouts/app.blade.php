@@ -75,9 +75,14 @@
                                 role="button" data-toggle="dropdown" aria-haspopup="true"
                                 aria-expanded="false" v-pre>
                                 {{ Auth::user()->name }}
-                            <e id="welcome-user">
-                                Hello User
-                            </a>
+                                <div id="welcome-user">
+                                    <script type="application/javascript">
+                                        var str=document.getElementById("welcome-user");
+                                        var email="{{$userData['email']}}";
+                                        var user_id=email.split('@',1);
+                                        str.innerHTML = user_id;
+                                    </script>
+                                </div>
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-right"

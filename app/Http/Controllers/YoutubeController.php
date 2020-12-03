@@ -3,7 +3,7 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\files;
-require '/Users/secret/Documents/GitHub/YT_MusicBank/vendor/autoload.php';
+require '/Users/park-yubeen/dbproject/YT_MusicBank/vendor/autoload.php';
 
 use YoutubeDl\Options;
 use YoutubeDl\YoutubeDl;

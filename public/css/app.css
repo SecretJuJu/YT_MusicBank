@@ -10810,8 +10810,9 @@ a.text-dark:focus {
 #welcome-user {
   font-size:24px;
   color:black;
-  text-align:right;
+  text-align:center;
   margin:auto;
+  display:inline-block;
 }
 
 #main-logo {

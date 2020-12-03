@@ -21,7 +21,6 @@
                 <input id="search-button" type="submit" value="SEARCH">
             </form>
         </div>
-        
-    <div id='result'></div>
+
     </body>
 </html>
