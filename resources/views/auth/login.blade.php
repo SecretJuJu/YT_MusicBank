@@ -51,11 +51,6 @@
                             </div>
                         </div>
 
-                        <!----- Login With Google ----->
-                        <div class="col-md-4 col-form-label text-md-right">
-                            Login With Google
-                        </div>
-
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
@@ -69,10 +64,28 @@
                                 @endif
                             </div>
                         </div>
+
+                    </br>
+
+                </br>
+                <!----- Login With Google ----->
+                <div class="from-group row">
+                        <div class="col-md-4 col-form-label text-md-right">
+                        </div>
+
+                        <div class="col-md-6">
+                            <a href="/auth/google">
+                                <img src="img/google-logo.png" alt="google_logo" width="40" height="40" style="margin:0px 0px 0px 23px">
+                            <div style="margin:10px 0px 0px 0px">Google Login</div>
+                            </a>
+                        </div>
+
                     </form>
                 </div>
+
             </div>
         </div>
     </div>
 </div>
 @endsection
+
