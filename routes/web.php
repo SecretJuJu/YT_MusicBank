@@ -14,9 +14,7 @@ use App\Http\Controllers\Auth\GoogleController;
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-});
+Route::get('/',App\Http\Controllers\homeController::class)->name('home');
 
 
 

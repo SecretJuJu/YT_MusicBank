@@ -11,6 +11,7 @@ class UserInfoController extends Controller
         $this->middleware('auth');
     }
 
+
     public function show(Request $request){
         
         // return $request->user()->id;
