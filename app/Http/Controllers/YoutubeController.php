@@ -3,7 +3,7 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\files;
-require '/Users/park-yubeen/dbproject/YT_MusicBank/vendor/autoload.php';
+require '/Users/secret/Documents/GitHub/YT_MusicBank/vendor/autoload.php';
 
 use YoutubeDl\Options;
 use YoutubeDl\YoutubeDl;
@@ -48,7 +48,8 @@ class YoutubeController extends Controller
             curl_close($curl);
             
             if (json_decode($return) === null){
-                return $return;
+                $retData = ['result'=>false,'errcode'=>3];
+                return view('youtube.search', ['retData'=>$retData]);
             }
             
             $retData = ['result'=>true,'uri'=>$youtube_uri];
