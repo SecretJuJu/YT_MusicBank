@@ -19,7 +19,7 @@ class HomeController extends Controller
             $retData['loggined'] = true;
             $retData['userData'] = ['email'=>Auth::user()->email];
         }
-        return dd($retData);
+        
         return view('home')->with($retData);
     }
 }
