@@ -59,79 +59,73 @@ class YoutubeController extends Controller
             $retData = ['result'=>false,'errcode'=>2];
             return view('youtube.search', ['retData'=>$retData]);
          }
-      
-         
-
-        
-        
-        
-           
     }
 
     
 
     public function download(Request $request)
     {
-        
-        if($_POST["filetype"] == 'mp3'){
-            $dir = "./media/mp3";
-            $filename = $_POST["youtube_id"]."."."mp3";
-        }else if($_POST["filetype"]=='mp4'){
-            $dir = "./media/mp4";
-            $filename = $_POST["youtube_id"]."."."mp4";
-        }
+        $filetype = $request->input('filetype');
+        $youtube_id = $request->input('youtube_id');
 
+        if($filetype == 'mp3'){
+            $dir = "./media/mp3";
+            $filename = $youtube_id."."."mp3";
+        }else if($filetype=='mp4'){
+            $dir = "./media/mp4";
+            $filename = $youtube_id."."."mp4";
+        }
+        
         foreach(scandir($dir) as $file){
             if($filename === $file){
-                return "file exist";
+                $element = files::where("youtube_id","=",$youtube_id)->first() -> get() ;
+                
+                return response()->json(array('result'=>true,'path'=>$dir."/".$youtube_id.".".$filetype,'name'=> $element[0]->name),200);
             }
         }
         $yt = new YoutubeDl();
-        if ($_POST["filetype"]==="mp3"){
+        if ($filetype==="mp3"){
             $collection = $yt->download(
                 Options::create()
                     ->downloadPath($dir)
                     ->extractAudio(true)
                     ->audioFormat("mp3")
                     ->audioQuality('0') // best
-                    ->output($_POST["youtube_id"].".mp3")
-                    ->url('https://www.youtube.com/watch?v='.$_POST["youtube_id"])
+                    ->output($youtube_id.".mp3")
+                    ->url('https://www.youtube.com/watch?v='.$youtube_id)
             );
-        }else if ($_POST["filetype"] === "mp4"){
+        }else if ($filetype === "mp4"){
             $collection = $yt->download(
                 Options::create()
                     ->downloadPath($dir)
-                    ->url('https://www.youtube.com/watch?v='.$_POST["youtube_id"])
-                    ->output($_POST["youtube_id"].".mp4")
+                    ->url('https://www.youtube.com/watch?v='.$youtube_id)
+                    ->output($youtube_id.".mp4")
             );
         }else {
             return "no hack TT";
         }
-        $youtube_id = $_POST["youtube_id"];
         $name = null;
         $filesize = 0;
         foreach ($collection->getVideos() as $video) {
             if ($video->getError() !== null) {
-                echo "Error downloading video: {$video->getError()}.";
+                return response()->json(array('result'=>false,'error'=>$video->getError()),200);
             } else {
-                echo "download success"; // Will return Phonebloks
                 $name = $video->getTitle();
                 $filesize = $video->getFilesize();
             }
         }
         
-        $filehash =  hash_file( "md5", $dir."/".$_POST["youtube_id"].".".$_POST["filetype"] );
-        echo $youtube_id;
-        echo $name;
-        echo $filesize;
-        echo $filehash;
+        $filehash =  hash_file( "md5", $dir."/".$youtube_id.".".$filetype);
+        
 
         files::create(array(
             'youtube_id' => $youtube_id,
             'name'  => $name,
             'file_size' => intval($filesize/1024),
             'file_hash' => $filehash,
-            'file_type' => $_POST["filetype"]
+            'file_type' => $filetype
         ));
+
+        return response()->json(array('result'=>ture,'path'=>$dir."/".$youtube_id.".".$filetype,'file_name'=>$name.".".$filetype),200);
     }
 }

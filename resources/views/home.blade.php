@@ -17,8 +17,10 @@
         </div>
         <div id="search">
             <form action="/search" method="get">
-                <input id="search-box" type="text" placeholder="Type Youtube URL" name="uri">
-                <input id="search-button" type="submit" value="SEARCH">
+                <div class="form-box">  
+                    <input id="search-box" type="text" placeholder="Type Youtube URL" name="uri">
+                    <input id="search-button" type="submit" value="SEARCH">
+                </div>
             </form>
         </div>
 
