@@ -23,12 +23,23 @@ class UserInfoController extends Controller
     }
 
     public function store(Request $request){
-        return "it works!";
+        $filetype = $request->input('filetype');
+        $youtube_id = $request->input('youtube_id');
+        if($filetype == 'mp3'){
+            $dir = "./media/mp3";
+            $filename = $youtube_id."."."mp3";
+        }else if($filetype=='mp4'){
+            $dir = "./media/mp4";
+            $filename = $youtube_id."."."mp4";
+        }
+        
+        $filehash =  hash_file( "md5",$dir."/".$youtube_id.".".$filetype);
         user_info::create([
             'user_id' => $request->user()->id,
             'youtube_id' => $request->youtube_id,
+            'file_hash' => $filehash
         ]);
-        return redirect()->back();
+        return response()->json(array('result'=>true));
     }
 
 }

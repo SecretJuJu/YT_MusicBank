@@ -29,7 +29,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>YT MusicBank</title>
         <meta name="csrf-token" content="{{ csrf_token() }}">
-        <!-- <link rel="stylesheet" href="/css/search.css"/> -->
+        <link rel="stylesheet" href="/css/search.css"/>
 </head>
     <body>
     @include('layouts.app')
@@ -54,12 +54,13 @@
         <input type="checkbox" name="filetype" value="mp3">
         <input class="btn-5" type="button" name="filetype" value="mp4">
         -->
+        <!-- <form action="/download" method="post">
+          @csrf
+          <input type="text" name="filetype">
+          <input type="text" name="youtube_id">
+          <input type="submit" value="제출">
+        </form> -->
         
-        <form id="formdata">
-          <input type="hidden" name="youtube_id">
-          <input type="hidden" name="filetype">
-        </form>
-            
         {{-- YoutubePlayer --}}
         <script type="text/javascript" src="/js/youtubeplayer.js"></script>
 
@@ -73,7 +74,8 @@
           
 
           function converting (filetype) {
-          
+            $(".converting").css("display", "block")
+            $(".converting").html("Converting...")
             $.ajax({
                   //아래 headers에 반드시 token을 추가해줘야 한다.!!!!! 
                   headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
@@ -82,14 +84,42 @@
                   dataType: 'json',
                   data: { "youtube_id" : youtube_id , "filetype":filetype },
                   success: function(data) {
-                        console.log(data);
+                    console.log(data)
+                    if(data.result) {
+                      @if (!Auth::check())
+                      $(".converting").html(" <a href=\"/media/"+filetype+"/"+youtube_id+"."+filetype+"\" id=\"downloadBtn\"download=\""+data.name+"."+filetype+"\">Download</a>");
+                      @else  
+                      $(".converting").html(" <a href=\"/media/"+filetype+"/"+youtube_id+"."+filetype+"\" id=\"downloadBtn\"download=\""+data.name+"."+filetype+"\" onclick=\"logging(\'"+filetype+"\')\">Download</a>");
+                      @endif
+                    }else {
+                      $(".converting").html("Failed")
+                    }
+                      
                   },
                   error: function(data) {
                         console.log(data);
                   }
             });
           }
-          
+          function logging(filetype){
+            console.log({ "youtube_id" : youtube_id , "filetype":filetype })
+            $.ajax({
+                  //아래 headers에 반드시 token을 추가해줘야 한다.!!!!! 
+                  headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                  },
+                  type: 'post',
+                  url: '/logging',
+                  dataType: 'json',
+                  data: { "youtube_id" : youtube_id , "filetype":filetype },
+                  success: function(data) {
+                    console.log(data)
+                  },
+                  error: function(data) {
+                        console.log(data);
+                  }
+            });
+          }
         </script>
     </body>
 </html>

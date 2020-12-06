@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class user_info extends Model
 {
     use HasFactory;
+    protected $fillable = ['youtube_id','user_id','file_hash'];
 }

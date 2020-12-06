@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
@@ -78,7 +79,8 @@
                                 <div id="welcome-user">
                                     <script type="application/javascript">
                                         var str=document.getElementById("welcome-user");
-                                        var email="{{$userData['email']}}";
+                                       
+                                        var email="{{$retData['userData']['email']}}";
                                         var user_id=email.split('@',1);
                                         str.innerHTML = user_id;
                                     </script>
@@ -88,7 +90,7 @@
                             <div class="dropdown-menu dropdown-menu-right"
                                 aria-labelledby="navbarDropdown">
 
-                                <a class="dropdown-item" href="user_info">
+                                <a class="dropdown-item" href="{{ route('myDownloads.show')}}">
                                     My Downloads
                                 </a>
                                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();

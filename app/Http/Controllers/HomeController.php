@@ -20,6 +20,6 @@ class HomeController extends Controller
             $retData['userData'] = ['email'=>Auth::user()->email];
         }
         
-        return view('home')->with($retData);
+        return view('home',["retData"=>$retData]);
     }
 }
