@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\user_info;
+use Illuminate\Support\Facades\Auth;
+
 
 class UserInfoController extends Controller
 {
@@ -18,7 +20,12 @@ class UserInfoController extends Controller
         $infos = user_info::join('files',function ($join) use ($request) {
             $join->on('user_infos.file_hash','files.file_hash')->where('user_infos.user_id',$request->user()->id);
         })->get();
-        return view('user_info.show', ['infos'=>$infos]);
+
+        $retData['loggined'] = true;
+        $retData['userData'] = ['email'=>Auth::user()->email];
+        $retData = ['result'=>true,'userData'=>['email'=>Auth::user()->email],'loggined'=>true,'infos'=>$infos];
+
+        return view('user_info.show', ['retData'=>$retData]);
         // return view('user_info.show', compact('info'));
     }
 

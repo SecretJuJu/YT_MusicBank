@@ -10807,6 +10807,23 @@ a.text-dark:focus {
 
 /*--------------------------------------------------*/
 
+#main {
+  height: 40vh;
+  display: flex;
+  align-items: center;
+}
+
+#main h1{
+  margin: 0 auto;
+  text-align: center;
+  font-size: xxx-large;
+}
+#main h1 a{
+  text-decoration: none;
+  color : skyblue;
+}
+
+
 #welcome-user {
   font-size:24px;
   color:black;
@@ -10861,6 +10878,28 @@ a.text-dark:focus {
   outline: none;
 }
 
+.log_box {
+  width:100vw;
+  display: flex;
+  justify-content:center;
+}
+.log_box>div {
+  width:80%;
+}
+.log_box table{
+  width:100%;
+  display: flex;
+  justify-content:center;
+}
+
+.log_box table tbody{
+  width:100%;
+}
+
+.log_box table tr{
+  display: table;
+  width:100%;
+}
 
 /*--------------------------------------------------*/
 
