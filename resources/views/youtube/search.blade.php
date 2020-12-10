@@ -54,12 +54,12 @@
         <input type="checkbox" name="filetype" value="mp3">
         <input class="btn-5" type="button" name="filetype" value="mp4">
         -->
-        <!-- <form action="/download" method="post">
+        <form action="/download" method="post">
           @csrf
           <input type="text" name="filetype">
           <input type="text" name="youtube_id">
           <input type="submit" value="제출">
-        </form> -->
+        </form>
         
         {{-- YoutubePlayer --}}
         <script type="text/javascript" src="/js/youtubeplayer.js"></script>

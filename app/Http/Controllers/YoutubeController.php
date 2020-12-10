@@ -119,12 +119,14 @@ class YoutubeController extends Controller
                     ->url('https://www.youtube.com/watch?v='.$youtube_id)
             );
         }else if ($filetype === "mp4"){
+            
             $collection = $yt->download(
                 Options::create()
                     ->downloadPath($dir)
                     ->url('https://www.youtube.com/watch?v='.$youtube_id)
                     ->output($youtube_id.".mp4")
             );
+            return dd($collection);
         }else {
             return "no hack TT";
         }

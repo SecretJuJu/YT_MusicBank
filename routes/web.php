@@ -14,7 +14,7 @@ use App\Http\Controllers\Auth\GoogleController;
 |
 */
 
-Route::get('/',App\Http\Controllers\homeController::class)->name('home');
+Route::get('/',App\Http\Controllers\HomeController::class)->name('home');
 
 
 
@@ -39,4 +39,4 @@ Route::post('/download',[App\Http\Controllers\YoutubeController::class,'download
 
 
 // CheckFile
-Route::get('/check',[App\Http\Controllers\FilesController::class,'check'])->name('file.check');
+// Route::get('/check',[App\Http\Controllers\FilesController::class,'check'])->name('file.check');
